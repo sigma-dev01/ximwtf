@@ -3,164 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>discord.gg/drogen</title>
+    <meta http-equiv="refresh" content="0; url=https://goodz.wtf/">
+    <title>Redirecting...</title>
     <style>
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
         body {
+            background-color: #000;
+            color: white;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-            background-color: rgba(0, 0, 0, 0.3); 
-            backdrop-filter: blur(5px);
-            font-family: 'Courier New', monospace;
-            color: white; 
-        }
-
-        #entrance {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.85); 
-            z-index: 1000;
-        }
-
-        #clickMe {
-            font-size: 3em;
-            padding: 20px 40px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            cursor: pointer;
-            animation: float 3s ease-in-out infinite;
-            background: rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s;
-            color: white; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-        }
-
-        #clickMe:hover {
-            transform: scale(1.1);
-        }
-
-        #mainContent {
-            display: none;
             text-align: center;
         }
-
-        #ipDisplay {
-            font-size: 4.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-            letter-spacing: 3px;
-            color: white; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
+        .redirect-message {
+            animation: pulse 2s infinite;
         }
-
-        .subtitle {
-            font-size: 2em;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 15px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            color: white; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-        }
-
-        #audioPlayer {
-            margin-top: 30px;
-            font-size: 1.5em;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 100%);
-            pointer-events: none;
-            z-index: -1;
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
-    <div id="entrance">
-        <div id="clickMe">CLICK ME</div>
+    <div class="redirect-message">
+        <h1>Redirecting to goodz.wtf...</h1>
+        <p>If you are not redirected automatically, <a href="https://goodz.wtf/" style="color: #0ff;">click here</a>.</p>
     </div>
-    
-    <div id="mainContent">
-        <div id="player"></div>
-        <p id="ipDisplay">Loading your IP address...</p>
-        <p class="subtitle">Your IP address is displayed above</p>
-
-        <div id="audioPlayer">
-            <audio id="audio" loop>
-                <source src="music.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-            <button id="playButton">Play Music</button>
-        </div>
-    </div>
-
     <script>
-        const audio = document.getElementById('audio');
-        const entrance = document.getElementById('entrance');
-        const mainContent = document.getElementById('mainContent');
-        const clickMe = document.getElementById('clickMe');
-        const playButton = document.getElementById('playButton');
-        
-        function startExperience() {
-            entrance.style.display = 'none';
-            mainContent.style.display = 'block';
-            document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('background.jpg')";
-            displayClientIP();
-        }
-
-        clickMe.addEventListener('click', startExperience);
-        
-        playButton.addEventListener('click', function() {
-            audio.play().catch(function(error) {
-                console.log("Audio playback failed:", error);
-            });
-        });
-
-        function displayClientIP() {
-            // Get IP from server endpoint instead of third-party service
-            fetch('/get-ip')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('ipDisplay').textContent = data.ip;
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    document.getElementById('ipDisplay').textContent = "IP not available";
-                });
-        }
+        // JavaScript redirect as a fallback
+        window.location.href = "https://goodz.wtf/";
     </script>
 </body>
 </html>
